@@ -13,18 +13,21 @@
 
 ## Project Outline:
 
-- 1.Website Owner (System Administrator)
+1. Website Owner (System Administrator)
+
 - User management: Can add and remove users (stadium or pool owners, and regular users).
 - Content management: Can add, modify, or delete any information on the website (such as stadium descriptions, photos, facilities, etc.).
 - Comment management: Can review comments left by users and delete inappropriate comments.
 - (Bonus) Settings management: Modify general website settings such as homepage design, colours, and various sections.
 
-- 2. Stadium and Pool Owners
+2. Stadium and Pool Owners
+
 - Add or edit information: Can enter or modify information about the stadiums or pools they manage (such as name, location, available times, and prices).
 - Add and change photos: Can upload and update photos of the stadiums or pools as needed.
 - Interact with comments: Can respond to comments related to their facilities or provide answers to any questions asked.
 
-- 3. Users (Website Visitors)
+3. Users (Website Visitors)
+
 - Write comments: Can leave comments about their experience using the stadiums or pools and rate them.
 - Rate facilities: Can rate stadiums or pools based on their personal experience.
 - Browse information: Can browse available information about the stadiums and pools, such as available facilities, location, and prices.
