@@ -34,7 +34,7 @@
 
 ## BLock Diagram:
 
-![Block Diagram](https://i.imgur.com/8DknyjZ.png)
+![Block Diagram](https://i.imgur.com/pVSEaB2.png)
 
 ## Home page Design Example:
 
