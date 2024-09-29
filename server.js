@@ -15,7 +15,7 @@ const PORT = process.env.PORT
 // Initialize Express
 const app = express()
 
-require('./config/passport')
+// require('./config/passport')
 
 // Look for static file in the public folder.
 // (CSS, JS,  Image, Video, Audio)
@@ -31,13 +31,13 @@ app.set('view engine', 'ejs')
 app.use(expressLayouts)
 
 // Passport and Session configurations
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true
-  })
-)
+// app.use(
+//   session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: true
+//   })
+// )
 
 // Share the information with other pages
 app.use(function (req, res, next) {
