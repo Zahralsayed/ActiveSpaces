@@ -12,17 +12,7 @@
   <a href="/" class="noStyle">
     <h1>Active Spaces</h1>
   </a>
-  <nav>
-    <% if(user) { %>
-      <% console.log("reaching here") %>
-      <a href="/logout" class="btn btn-outline-primary">Logout</a>
-      Hi <%= user.name %>
-
-    <% } else { %>
-      <% console.log("reaching here??") %>
-      <a href="/auth/google" class="btn btn-outline-primary">Signin</a>
-    <%  } %>
-  </nav>
+  
 
    <hr>
 
@@ -31,7 +21,7 @@
   <br /><br />
   <hr />
   <br />
-  <div class="footer">
+  <div class="copyright">
     Active Spaces &copy;  2024
   </div>
 </body>

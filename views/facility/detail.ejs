@@ -1,0 +1,11 @@
+
+<div id="facility-details">
+    <h2><%= facility.name %></h2>
+    <p><strong>Description:</strong> <%= facility.description %></p>
+    <p><strong>Location:</strong> <%= facility.location %></p>
+    <p><strong>Price:</strong> $<%= facility.price %></p>
+    <% if (facility.images.length > 0) { %>
+        <img src="<%= facility.images[0] %>" alt="<%= facility.name %>" />
+    <% } %>
+</div>
+<button onclick="window.location.href='/facilities'">Back to Listing</button> <!-- Navigate back to listing -->
