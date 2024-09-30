@@ -5,7 +5,6 @@ const facilitySchema = mongoose.Schema({
     description: String,
     location: String,
     type: String,
-    availableTime: Date,
     price: Number,
     images: [String],
     owner: { type: mongoose.Schema.Types.ObjectId, 
