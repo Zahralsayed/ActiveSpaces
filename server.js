@@ -56,7 +56,7 @@ const facilityRouter = require('./routes/facility')
 // Mount Routes
 app.use('/', indexRouter)
 //app.use('/', authRouter)
-app.use('/facilities', facilityRouter)
+app.use('/facility', facilityRouter)
 
 
 app.listen(PORT, () => {
