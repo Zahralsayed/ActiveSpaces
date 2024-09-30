@@ -1,0 +1,25 @@
+<h2><%= article.title %></h2>
+
+<div>
+  Content: <%= pools.content %>
+</div>
+
+<div>
+  Is Published: <%= pools.isPublished %>
+</div>
+
+<div>
+  Total Words: <%= pools.totalWords %>
+</div>
+
+<div>
+  Author: <%= pools.author %>
+</div>
+
+<div>
+  Created At: <%= dayjs(pools.createdAt).fromNow(true) %>
+</div>
+
+<div>
+  Updated At: <%= dayjs(pools.updatedAt).fromNow(true) %>
+</div>

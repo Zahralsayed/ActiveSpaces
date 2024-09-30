@@ -14,12 +14,16 @@
   </a>
   <nav>
     <% if(user) { %>
-      <% console.log("reaching here") %>
+      <a href="/camps/index" class="btn btn-outline-primary">Campss</a>
+      <a href="/camps/add" class="btn btn-outline-primary">Add Camps</a>
+      <a href="/pools/index" class="btn btn-outline-primary">Poolss</a>
+      <a href="/pools/add" class="btn btn-outline-primary">Add Pools</a>
       <a href="/logout" class="btn btn-outline-primary">Logout</a>
       Hi <%= user.name %>
 
     <% } else { %>
-      <% console.log("reaching here??") %>
+      <a href="/camps/index" class="btn btn-outline-primary">Campss</a>
+      <a href="/pools/index" class="btn btn-outline-primary">Poolss</a>
       <a href="/auth/google" class="btn btn-outline-primary">Signin</a>
     <%  } %>
   </nav>

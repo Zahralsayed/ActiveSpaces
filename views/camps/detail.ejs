@@ -1,0 +1,25 @@
+<h2><%= article.title %></h2>
+
+<div>
+  Content: <%= camps.content %>
+</div>
+
+<div>
+  Is Published: <%= camps.isPublished %>
+</div>
+
+<div>
+  Total Words: <%= camps.totalWords %>
+</div>
+
+<div>
+  Author: <%= camps.author %>
+</div>
+
+<div>
+  Created At: <%= dayjs(camps.createdAt).fromNow(true) %>
+</div>
+
+<div>
+  Updated At: <%= dayjs(camps.updatedAt).fromNow(true) %>
+</div>
