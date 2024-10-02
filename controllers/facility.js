@@ -29,19 +29,30 @@ exports.facility_create_get = (req, res) => {
 }
 
 exports.facility_create_post = (req, res) => {
-  console.log(req.body)
-  let facility = new Facility(req.body)
+  // Handle file upload
+  upload(req, res, (err) => {
+    if (err) {
+      console.log('File upload error:', err)
+      return res.send('Error uploading file')
+    }
 
-  // save facility
-  facility
-    .save()
-    .then(() => {
-      res.redirect(`/facility/index?type=${facility.type}`)
-    })
-    .catch((err) => {
-      console.log(err)
-      res.send('Please try again later!')
-    })
+    // Add the image path to req.body
+    req.body.image = req.file ? req.file.filename : null
+
+    console.log(req.body)
+    let facility = new Facility(req.body)
+
+    // save facility
+    facility
+      .save()
+      .then(() => {
+        res.redirect(`/facility/type/${facility.type}`)
+      })
+      .catch((err) => {
+        console.log(err)
+        res.send('Please try again later!')
+      })
+  })
 }
 
 // Get facility by ID for editing
@@ -63,7 +74,7 @@ exports.facility_edit_post = (req, res) => {
   const facilityType = req.query.type
   Facility.findByIdAndUpdate(facilityId, req.body, { new: true })
     .then(() => {
-      res.redirect(`/facility/index?type=${facilityType}`) // Redirect to the index page after update
+      res.redirect(`/facility/type/${facilityType}`) // Redirect to the index page after update
     })
     .catch((err) => {
       console.log(err)
@@ -90,7 +101,9 @@ exports.facility_show_id = (req, res) => {
   Facility.findById(req.query.id)
     .populate('owner', 'username')
     .then((facility) => {
+      console.log('facility image', facility.image) // Log the image value here
       Comment.find({ facilityId: facility._id })
+        .populate('userId')
         .then((comments) => {
           console.log(comments)
           res.render('facility/detail', { facility, dayjs, comments }) // Render details page
