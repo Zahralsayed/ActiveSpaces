@@ -7,5 +7,39 @@
     <% if (facility.images.length > 0) { %>
         <img src="<%= facility.images[0] %>" alt="<%= facility.name %>" />
     <% } %>
+
+   
+    <h3>Comments</h3>
+        <% comments.forEach(comment => { %>
+            <div class="comment">
+                <p><strong><%= comment.userId.username %>:</strong> <%= comment.comment %></p>
+                <p><em>Rated: <%= comment.rate %></em></p>
+            </div>
+        <% }); %>
+ 
 </div>
-<button onclick="window.location.href='/facility/index'">Back to Listing</button> <!-- Navigate back to listing -->
+
+<% if (user) { %> <!-- Check if user is signed in -->
+    <form method="POST" action="/comment/add">
+        <input type="hidden" name="facilityId" value="<%= facility._id %>">
+        <div>
+            <label>Comment:</label>
+            <input type="text" name="comment" class="form-control" required>
+        </div>
+        <div>
+            <label>Rate:</label>
+            <input type="number" name="rate" class="form-control" min="1" max="5" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+
+<% } else { %>
+    <p>Please <a href="/auth/google">sign in</a> to leave a comment or edit this facility.</p>
+<% } %>
+
+<button onclick="window.history.back()" class="btn btn-primary">Back</button> <!-- Navigate back to listing -->
+
+
+
+

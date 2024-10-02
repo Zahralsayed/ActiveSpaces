@@ -1,0 +1,13 @@
+<h1><%= facilityType %></h1>
+
+<div id="facility-list">
+    <% facilities.forEach(facility => { %>
+        <div class="facility-card">
+            <h2><%= facility.name %></h2>
+            <p><%= facility.description %></p>
+            <button onclick="window.location.href='/facility/detail?id=<%= facility._id %>'">View Details</button>
+        </div>
+    <% }); %>
+</div>
+
+<button onclick="window.location.href='/facility/index'">Back to All Facilities</button>

@@ -44,23 +44,22 @@ app.use(passport.session())
 
 // Share the information with other pages
 app.use(function (req, res, next) {
-  console.log("req.user", req.user)
+  console.log('req.user', req.user)
   res.locals.user = req.user
   next()
 })
-
-
 
 // Import Routes
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
 const facilityRouter = require('./routes/facility')
+const commentRouter = require('./routes/comment')
 
 // Mount Routes
 app.use('/', indexRouter)
 app.use('/', authRouter)
 app.use('/facility', facilityRouter)
-
+app.use('/comment', commentRouter)
 
 app.listen(PORT, () => {
   console.log(`ACTIVESPACES is running on PORT ${PORT}`)

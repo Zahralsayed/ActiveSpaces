@@ -16,9 +16,9 @@
 
   <nav>
     <% if(user) { %>
-      <a href="/facility/index" class="btn btn-outline-primary">Facility</a>
+     <!-- <a href="/facility/index" class="btn btn-outline-primary">Facility</a> -->
       <a href="/logout" class="btn btn-outline-primary">Logout</a>
-      Hi <%= user.email %>
+      Hi <%= user.name %>
 
     <% } else { %>
       <a href="/auth/google" class="btn btn-outline-primary">Signin</a>

@@ -7,8 +7,11 @@ const facilitySchema = mongoose.Schema({
     type: String,
     price: Number,
     images: [String],
+    phoneNum: Number,
     owner: { type: mongoose.Schema.Types.ObjectId, 
-             ref: 'User' } 		
+             ref: 'User' } ,	
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+	
 }, {
     timestamps: true
 })
