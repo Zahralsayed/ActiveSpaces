@@ -1,96 +1,33 @@
-const passport = require('passport')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+}, async (email, password, done) => {
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return done(null, false, { message: 'Incorrect email.' });
 
-const User = require('../models/User')
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return done(null, false, { message: 'Incorrect password.' });
 
-passport.use(
-  new GoogleStrategy(
-    // Configuration object
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK
-    },
-    // The verify callback function...
-    // Marking a function as an async function allows us
-    // to consume promises using the await keyword
-    async function (accessToken, refreshToken, profile, cb) {
-      const passport = require('passport')
-
-      const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-
-      const User = require('../models/User')
-
-      passport.use(
-        new GoogleStrategy(
-          // Configuration object
-          {
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: process.env.GOOGLE_CALLBACK
-          },
-          // The verify callback function...
-          // Marking a function as an async function allows us
-          // to consume promises using the await keyword
-          async function (accessToken, refreshToken, profile, cb) {
-            // When using async/await  we use a
-            // try/catch block to handle an error
-            try {
-              // A user has logged in with OAuth...
-              let user = await User.findOne({ googleId: profile.id })
-              // Existing user found, so provide it to passport
-              if (user) return cb(null, user)
-              // We have a new user via OAuth!
-              user = await User.create({
-                name: profile.displayName,
-                googleId: profile.id,
-                email: profile.emails[0].value,
-                avatar: profile.photos[0].value
-              })
-              return cb(null, user)
-            } catch (err) {
-              return cb(err)
-            }
-          }
-        )
-      )
-
-      passport.serializeUser(function (user, cb) {
-        cb(null, user._id)
-      })
-
-      passport.deserializeUser(async function (userId, cb) {
-        // It's nice to be able to use await in-line!
-        cb(null, await User.findById(userId))
-      })
-      // When using async/await  we use a
-      // try/catch block to handle an error
-      try {
-        // A user has logged in with OAuth...
-        let user = await User.findOne({ googleId: profile.id })
-        // Existing user found, so provide it to passport
-        if (user) return cb(null, user)
-        // We have a new user via OAuth!
-        user = await User.create({
-          name: profile.displayName,
-          googleId: profile.id,
-          email: profile.emails[0].value,
-          avatar: profile.photos[0].value
-        })
-        return cb(null, user)
-      } catch (err) {
-        return cb(err)
-      }
+        return done(null, user);
+    } catch (err) {
+        return done(err);
     }
-  )
-)
+}));
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user._id)
-})
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
 
-passport.deserializeUser(async function (userId, cb) {
-  // It's nice to be able to use await in-line!
-  cb(null, await User.findById(userId))
-})
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await User.findById(id);
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
